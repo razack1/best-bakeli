@@ -1,0 +1,8 @@
+.carde {
+  width: 200px;
+  height: 120px;
+}
+
+.card-row.amount {
+  font-size: small;
+}

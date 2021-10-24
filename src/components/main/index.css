@@ -1,0 +1,94 @@
+.mains {
+  background-color: rgb(242, 242, 243);
+  float: left;
+  margin-left: 200px;
+  width: 80%;
+  height: 712px !important;
+  position: relative;
+  border-radius: 75px 0px 0px 75px;
+}
+.card {
+  left: 5%;
+  /* height: fit-content; */
+  border-radius: 2%;
+}
+.card img {
+  border-radius: 10%;
+  margin: 4%;
+  width: 40%;
+  float: left;
+  height: 80%;
+}
+.card-img-teach{
+    width: 120px !important;
+    height: 100px !important;
+}
+.card-body-teach{
+    margin-top: 10px;
+}
+.teach-name{
+    margin-right: -120px !important;
+}
+.teach{
+   right: 100px !important;
+}
+.title-teach{
+    margin-right: 150px;
+    margin-top: 50px;
+}
+
+.card .height {
+  height: 10%;
+}
+.topteacher {
+  width: 20%;
+  left: 150px !important;
+}
+
+@media screen and (max-width: 924px) {
+  .mains {
+    color: #689f38;
+    background-color: aliceblue;
+    margin-left: 150px;
+  }
+  .searchBar {
+    margin-left: 50px;
+    width: 10%;
+  }
+}
+h4 {
+  margin-left: 4.5%;
+}
+
+.search-box {
+  width: 40%;
+  position: relative;
+  display: flex;
+  left: 5%;
+  /* top:40% */
+  margin-top: 2%;
+}
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #689f38;
+  border-radius: 10px 0 0 10px;
+  border-right: none;
+  outline: none;
+  font-size: 15px;
+  color: #689f38;
+  background: none;
+}
+.search-button {
+  text-align: center;
+  height: 51px;
+  width: 40px;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid #689f38;
+  border-radius: 0 10px 10px 0;
+  border-left: none;
+  background: none;
+  font-size: 20px;
+  border-left: 4px solid #689f38;
+}
