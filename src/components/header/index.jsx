@@ -66,9 +66,11 @@ const Header = () => {
               </MenuItem>
               <MenuItem icon={<FaList />} >Category</MenuItem>
               <MenuItem icon={<RiHealthBookFill />}  onClick={()=>routeLink.push('cours')}>Cours</MenuItem>
-              <MenuItem icon={<GiTeacher/>} onClick={()=>routeLink.push('signin')}>Author</MenuItem>
+              <MenuItem icon={<GiTeacher/>} onClick={()=>routeLink.push('listprof')}>Author</MenuItem>
               <MenuItem icon={<GiTeacher />}  onClick={()=>routeLink.push('cours')}>Cours</MenuItem>
-              <MenuItem icon={<FaUserPlus />}  onClick={()=>routeLink.push('cours')}>Cours</MenuItem>
+              <MenuItem icon={<FaUserPlus />}  onClick={()=>routeLink.push('archives')}>Archives</MenuItem>
+              <MenuItem icon={<FaUserPlus />}  onClick={()=>routeLink.push('listprof')}>Archives Prof</MenuItem>
+              <MenuItem icon={<FaUserPlus />}  onClick={()=>routeLink.push('signin')}>Archives Prof</MenuItem>
               <MenuItem icon={<BiCog />}>Settings</MenuItem>
             </Menu>
           </SidebarContent>

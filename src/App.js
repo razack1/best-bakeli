@@ -6,7 +6,12 @@ import {BrowserRouter as Router, Route,Link,Switch,} from 'react-router-dom'
 import Welcome from './components/welcome';
 import Login from './components/login';
 import SignIn from './components/signIn';
-import Cours from './components/cours'
+import Cours from './components/cours';
+import Prof from './components/prof';
+import Archives from './components/archives';
+import ListProf from './components/listProf';
+import Modal from './components/modal';
+
 
 function App() {
   return (
@@ -30,10 +35,27 @@ function App() {
 							<Sidebar />
 							<Cours />		
 						</Route>
+						<Route path='/prof' exact>
+							<Sidebar />
+							<Prof />		
+						</Route>
+						<Route path='/archives' exact>
+							<Sidebar />
+							<Archives />		
+						</Route>
+						
+						<Route path='/listprof' exact>
+							<Sidebar />
+							<ListProf />		
+						</Route>
 
 						<Route path='/signin' exact>
 							<Sidebar />
 							<SignIn />		
+						</Route>
+						<Route path='/mod' exact>
+							<Sidebar />
+							<Modal />		
 						</Route>
 						</Switch>
 						
