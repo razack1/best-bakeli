@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useHistory } from 'react-router';
-import {auth} from "../../firebase";
-
+import { auth } from "../../firebase";
 
 //import react pro sidebar components
 import {
@@ -14,12 +13,14 @@ import {
 } from "react-pro-sidebar";
 
 //import icons from react icons
-import { FaList, FaRegHeart,FaUserPlus,FaSign } from "react-icons/fa";
-import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
-import { RiPencilLine } from "react-icons/ri";
+import { FaList,FaSign } from "react-icons/fa";
+import { FiHome, FiLogOut} from "react-icons/fi";
+import { BsFileEarmarkPlusFill } from "react-icons/bs";
 import { BiCog } from "react-icons/bi";
-import {GiTeacher} from "react-icons/gi";
-import {RiHealthBookFill} from "react-icons/ri"
+import {IoIosPersonAdd} from "react-icons/io";
+import {CgUserList} from "react-icons/cg";
+import {MdSupervisedUserCircle} from "react-icons/md";
+
 
 
 
@@ -32,6 +33,7 @@ const Header = () => {
   
     //create initial menuCollapse state using useState hook
     const [menuCollapse, setMenuCollapse] = useState(true);
+     const [active, setActive] = useState(true)
 
     const routeLink= useHistory()
 
@@ -42,10 +44,13 @@ const Header = () => {
   };
 
   const logout= ()=>{
-    auth.signOut();
-    routeLink.push('')
-}
+      auth.signOut();
+      routeLink.push('')
+  }
 
+  useEffect(() => {
+    
+  }, [])
 
   return (
     <>
@@ -61,22 +66,19 @@ const Header = () => {
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="square">
-              <MenuItem active={true} icon={<FiHome />} onClick={()=>routeLink.push('welcome')}>
-                Home
-              </MenuItem>
-              <MenuItem icon={<FaList />} >Category</MenuItem>
-              <MenuItem icon={<RiHealthBookFill />}  onClick={()=>routeLink.push('cours')}>Cours</MenuItem>
-              <MenuItem icon={<GiTeacher/>} onClick={()=>routeLink.push('listprof')}>Author</MenuItem>
-              <MenuItem icon={<GiTeacher />}  onClick={()=>routeLink.push('cours')}>Cours</MenuItem>
-              <MenuItem icon={<FaUserPlus />}  onClick={()=>routeLink.push('archives')}>Archives</MenuItem>
-              <MenuItem icon={<FaUserPlus />}  onClick={()=>routeLink.push('listprof')}>Archives Prof</MenuItem>
-              <MenuItem icon={<FaUserPlus />}  onClick={()=>routeLink.push('signin')}>Archives Prof</MenuItem>
+              <MenuItem active={true} icon={<FiHome />} onClick={()=>routeLink.push('welcome')} title='Acceuil'/>
+              <MenuItem icon={<FaList />} onClick={()=>routeLink.push('archives')} title='Archives'/>
+              <MenuItem icon={<CgUserList />} onClick={()=>routeLink.push('listprof')} title='Professeurs'/>
+              <MenuItem icon={<MdSupervisedUserCircle />} onClick={()=>routeLink.push('listapprenant')} title='Apprenants'/>
+              <MenuItem icon={<BsFileEarmarkPlusFill />}  onClick={()=>routeLink.push('cours')} title='Ajouter Cours'/>
+              <MenuItem icon={<IoIosPersonAdd />}  onClick={()=>routeLink.push('prof')} title='Ajouter Professeur'/>
+              <MenuItem icon={<FaSign />} onClick={()=>routeLink.push('signin')} title='Inscription'/>
               <MenuItem icon={<BiCog />}>Settings</MenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter>
             <Menu iconShape="square">
-            <MenuItem icon={<FiLogOut />} onClick={()=>logout()}>Logout</MenuItem>
+              <MenuItem icon={<FiLogOut />} onClick={()=>logout()}>Logout</MenuItem>
             </Menu>
           </SidebarFooter>
         </ProSidebar>

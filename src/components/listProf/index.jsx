@@ -49,7 +49,7 @@ const ListProf = () => {
     }
 
     return (
-        <div className='prof'>
+        <div className='prof bg-light shadow w-50 mt-2'>
             <h4  className='text-start'>Professeurs</h4>
             <div
               id="scrollableDiv"

@@ -16,6 +16,9 @@
   margin-left: 10px !important;
   margin-top: 2px !important;
 }
+.card-text{
+  margin-left: 15px;
+}
 .card img {
   height: 80%;
 }
@@ -27,4 +30,13 @@
 .teach-name {
   margin-bottom: -2px;
   margin-left: -150px !important;
+}
+.teache-name {
+  margin-bottom: -2px;
+  margin-left: -150px !important;
+}
+@media screen and (max-width: 700px){
+  .mainRight{
+    top: -10000px !important;
+  }
 }

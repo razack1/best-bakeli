@@ -10,6 +10,7 @@ import Cours from './components/cours';
 import Prof from './components/prof';
 import Archives from './components/archives';
 import ListProf from './components/listProf';
+import ListApprenant from './components/listApprenant';
 import Modal from './components/modal';
 
 
@@ -48,6 +49,11 @@ function App() {
 							<Sidebar />
 							<ListProf />		
 						</Route>
+						<Route path='/listapprenant' exact>
+							<Sidebar />
+							<ListApprenant />		
+						</Route>
+
 
 						<Route path='/signin' exact>
 							<Sidebar />

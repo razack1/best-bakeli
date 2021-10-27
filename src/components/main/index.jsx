@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useHistory } from 'react-router';
 import 'react-toastify/dist/ReactToastify.css';
 import SearchField from "react-search-field";
+import SweetAlert from 'react-bootstrap-sweetalert';
 import {dbCours,dbArchive, db,dbFirestore,dbFirestores} from "../../firebase";
 import img1 from '../../images/img1.jpg'
 import HalfRating from '../rating';
@@ -17,8 +18,14 @@ const Main = () => {
   const [detailEdit, setdEtailEdit] = useState('');
   const [editId, setEditId] = useState('');
   const [dataSearch, setdataSearch] = useState([]);
+  const [disableButton, setdisableButton] = useState(false);
+  const [show, setshow] = useState(false);
+
  const route= useHistory();
+
    let dataChange= '';
+
+   // function pour afficher les notifications
   const notify = (msg) => toast(msg);
 
   useEffect(() => {
@@ -30,7 +37,10 @@ const Main = () => {
       console.log(data)
       setDataCours(data);
     });
-}, []) 
+}, [dataChange]) 
+
+
+// function pour effectuer l'archivage d'un cour
 
 const archive=(id,cours,detail)=>{
   dbArchive.doc(id).set({cours,detail}).then(resp=>{
@@ -38,37 +48,78 @@ const archive=(id,cours,detail)=>{
    dbFirestores.collection("cours")
    .doc(id)
    .delete()
-   .then(() => notify('Deplacé avec succes')) // Document deleted
+   .then(() => {
+    notify('Deplacé avec succes');
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+   }) // Document deleted
    .catch((error) => notify(error));
  })
 }
-const filterSearch=()=>{
-  let dataFind= []
 
-  dataCours.map((data,index)=>{
-    if (search.toUpperCase() === data.cours.toUpperCase() && search !=='' ) {
-      dataFind.push(data)
-      setdataSearch(dataFind)
-    }
-  })
+   // function pour effectuer la recherche d'un cour
+   const filterSearch=()=>{
+    let dataFind= []
+
+    dataCours.map((data,index)=>{
+      if (search.toUpperCase() === data.cours.toUpperCase() && search !=='' ) {
+        dataFind.push(data)
+        setdataSearch(dataFind)
+      }
+    })
 }
 
-const handleEdit=(id,cour,detail)=>{
-  setEditId('');
-    setCourEdit(cour);
-    setdEtailEdit(detail);
-    setEditId(id);
-   setTimeout(() => {
-    console.log(editId)
-   }, 2000);
+// function pour determiner le contenu du modal de modification
+   //  installer le module react-bootstrap-sweetalert pour cela
+   const SweetAlertFunction = ({ show, disableButton, submit, hideAlert }) => {
+    return (
+      <SweetAlert
+        info
+        show={show}
+        showCancel
+        confirmBtnText="editer"
+        cancelBtnText="annuler"
+        confirmBtnBsStyle="success"
+        cancelBtnBsStyle="default"
+        disabled={disableButton}
+        title="Editer"
+        onConfirm={submit}
+        onCancel={hideAlert}
+      >
+        <form>
+          <label htmlFor="cour">Cours</label>
+          <br /> 
+          <input value={courEdit} className="input-control" onChange={(e) => setCourEdit(e.target.value)} /> <br /> 
+          <label htmlFor="cour">Details</label>
+          <br /> 
+          <input value={detailEdit} onChange={(e) => setdEtailEdit(e.target.value)} />
+        </form>
+
+      </SweetAlert>
+    );
+};
+
+ // function pour masquer le modal de modification
+ const hideAlert=()=> {
+  setshow(false);
 }
 
-const handleEditClick=(id,cour,detail)=>{
-      console.log(editId)
-//   dbCours.doc(id).set({cour,detail}).then(resp=>{
-//     notify();
-//  })
+// function pour modifier un cour
+const submit=(e)=> {
+
+  dbCours.doc(editId).update({'cours':courEdit,'detail':detailEdit}).then(res=> console.log(res));
+
+  setdisableButton(true );
+  notify('Modifié avec succes');
+  setshow(false);
+  setTimeout(() => {
+    setdisableButton(false );
+
+    window.location.reload();
+  }, 2000);
 }
+
 
     return (
         <div className='mains'>
@@ -119,7 +170,9 @@ const handleEditClick=(id,cour,detail)=>{
                               <div className="card-body">
                                 <p className="card-text">
                                   <small className="text-muted">
-                                    <button className='btn btn-outline-warning' title='edit' onClick={()=>handleEdit(cour.id,cour.cours,cour.detail)}> <a href="#popup1"><i className="fa fa-edit" aria-hidden="true"></i></a></button> &nbsp;
+                                  <button className='btn btn-outline-warning' title='edit' onClick={() =>{setCourEdit(cour.cours); setdEtailEdit(cour.detail);setEditId(cour.id); setshow( true)}}>
+                                      <i className="fa fa-edit" aria-hidden="true"></i>
+                                    </button> &nbsp;
                                     <button className='btn btn-outline-primary' title='archive' onClick={()=>archive(cour.id,cour.cours,cour.detail)}> <i className="fa fa-archive" aria-hidden="true"></i></button>&nbsp;
                                     <button className='btn btn-outline-success' title='detail' > <i className="fa fa-info-circle" aria-hidden="true"></i></button>
                                   </small>
@@ -153,7 +206,7 @@ const handleEditClick=(id,cour,detail)=>{
                               <div className="card-body">
                                 <p className="card-text">
                                   <small className="text-muted">
-                                    <button className='btn btn-outline-warning' title='edit' onClick={()=>handleEdit(cour.id,cour.cours,cour.detail)}> <a href="#popup1"><i className="fa fa-edit" aria-hidden="true"></i></a></button> &nbsp;
+                                  <button className='btn btn-outline-warning' title='edit'  onClick={() => {setCourEdit(cour.cours); setdEtailEdit(cour.detail); setEditId(cour.id); setshow( true)}}><i className="fa fa-edit" aria-hidden="true"></i></button> &nbsp;
                                     <button className='btn btn-outline-primary' title='archive' onClick={()=>archive(cour.id,cour.cours,cour.detail)}> <i className="fa fa-archive" aria-hidden="true"></i></button>&nbsp;
                                     <button className='btn btn-outline-success' title='detail' > <i className="fa fa-info-circle" aria-hidden="true"></i></button>
                                   </small>
@@ -183,26 +236,15 @@ const handleEditClick=(id,cour,detail)=>{
             />
             {/* Same as */}
             <ToastContainer />
-  
-            <div id="popup1" className="overlay">
-                        <div className="popup">
-                          <a className="close" href="#">&times;</a>
-                          <div className="content">
-                          <form id="contact" onSubmit={()=>handleEditClick(editId,courEdit,detailEdit)}>
-                              <h6>AJOUTER UN COURS</h6>
-                              <fieldset>
-                                <input placeholder=" Cours" type="text" tabIndex="2" value={courEdit} required onChange={(e)=>setCourEdit(e.target.value)}/>
-                              </fieldset>
-                              <fieldset>
-                                <input placeholder=" detail" type="text" tabIndex="2" value={detailEdit} required onChange={(e)=>setdEtailEdit(e.target.value)}/>
-                              </fieldset>
-                              <fieldset>
-                                  <button type="submit"> Editer</button>
-                              </fieldset>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
+
+            {/* Affichage du modal sweet Alert pour la modification      */}
+        <SweetAlertFunction
+          show={show}
+          disableButton={disableButton}
+          submit={() => submit()}
+          hideAlert={() => hideAlert()}
+        />
+
 
           <div className="topteacher my-4">
             <h1 className="title-teach my-2">Top Teacher</h1>

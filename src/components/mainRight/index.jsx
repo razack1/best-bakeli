@@ -7,7 +7,7 @@ import Card from '../card';
 
 const MainRight = () => {
 
-    const [calendar, setCalendar] = useState(new Date());
+  const [value, setCalendar] = useState(new Date());
      
     const calendarChange=(e)=>{
         console.log(e)
@@ -30,11 +30,13 @@ const MainRight = () => {
             
             {/* <div className='bg-light'> */}
             <Calendar
-                onChange={calendarChange}
-                value={calendar}
+                onChange={setCalendar}
+                value={value}
                 className='calend w-75 m-4 mx-5'
                 showNavigation='false'
                 tileClassName={tileClassName}
+                defaultActiveStartDate={new Date()}
+                style={{border: 'none'}}
             />
             {/* </div> */}
             <div className="card " style={{maxWidth: '470px', maxHeight: '460px'}}>
@@ -43,7 +45,7 @@ const MainRight = () => {
                             <img src={img1} className="card-img" alt="..."/>
                             <div className="card-body">
                               <p className="card-text">
-                               <span class="card-text teach-name">Jesus Christ</span>
+                               <span class="card-text teache-name">Jesus Christ</span>
                                <br />
                                <br />
                                <HalfRating/>

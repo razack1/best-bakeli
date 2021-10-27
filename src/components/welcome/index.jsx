@@ -6,8 +6,10 @@ import MainRight from '../mainRight';
 const Welcome = () => {
     return (
         <div className='App'> 
-            <Main />
-            <div className='container mainRight'>
+        <div className="top">
+        <Main />
+        </div>      
+            <div className=' top container mainRight'>
                 <MainRight />
             </div>
         </div>
