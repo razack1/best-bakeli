@@ -1,35 +1,42 @@
-import logo from './logo.svg';
+import {useState} from 'react';
 import './App.css';
 import "@material-tailwind/react/tailwind.css";
 import Sidebar from './components/header';
-import {BrowserRouter as Router, Route,Link,Switch,} from 'react-router-dom'
+import {BrowserRouter as Router, Route,Switch,} from 'react-router-dom'
 import Welcome from './components/welcome';
 import Login from './components/login';
 import SignIn from './components/signIn';
 import Cours from './components/cours';
+import Modal from './components/modal';
 import Prof from './components/prof';
 import Archives from './components/archives';
 import ListProf from './components/listProf';
 import ListApprenant from './components/listApprenant';
-import Modal from './components/modal';
+import ApprenantHeader from './components/apprenantHead';
+import WelcomeApprenant from './components/welcomeApprenant';
+
 
 
 function App() {
+
+	const [role, setrole] = useState('');
+
+
+	console.log(role)
+
   return (
     // <div className="App">
      <Router>					
 					<Switch>
 						<Route path='/' exact>
-							<Login />
+							<Login roleData={setrole}/>
 						</Route>
-						
 					</Switch>
-					
+					{role !=='apprenant'?(
 						<Switch>
 						<Route path='/welcome' exact>
 							<Sidebar />
-						
-						<Welcome />
+							<Welcome roleStatut={role}/>
 						</Route>
 
 						<Route path='/cours' exact>
@@ -53,8 +60,6 @@ function App() {
 							<Sidebar />
 							<ListApprenant />		
 						</Route>
-
-
 						<Route path='/signin' exact>
 							<Sidebar />
 							<SignIn />		
@@ -64,7 +69,16 @@ function App() {
 							<Modal />		
 						</Route>
 						</Switch>
-						
+						):(
+							<Switch>
+							<Route path='/welcomeApprenant' exact>
+								<ApprenantHeader />
+								<WelcomeApprenant />
+							</Route>
+
+						</Switch>	
+					)}
+
 					
 			</Router>		
     // </div>

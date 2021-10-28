@@ -1,0 +1,11 @@
+.App {
+    /* text-align: center; */
+    border: 1px red solid;
+    background-color: aqua;
+  }
+  .mainRight{
+    float: right;
+    margin-left: 20%;
+  }
+
+  

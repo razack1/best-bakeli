@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from 'react';
+import { useHistory } from 'react-router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { db,dbCours } from "../../firebase";
+import { dbCours } from "../../firebase";
 import './index.css';
 
 const Cours = () => {
@@ -9,6 +10,8 @@ const Cours = () => {
     const [cours, setCours] = useState('');
     const [detail, setDetail] = useState('')
     const [btn, setBtn] = useState(false);
+    const [dater, setDater] = useState('')
+    const route= useHistory();
 
     useEffect(() => {
         if (cours.lenght >2) {
@@ -21,19 +24,17 @@ const Cours = () => {
     const handleClick=(e)=>{
         e.preventDefault();
 
-        dbCours.doc().set({cours,detail}).then(resp=>{
+        dbCours.doc().set({cours,detail,dater}).then(resp=>{
             notify();
+            setTimeout(()=>{
+              route.push('/welcome');
+            }, 3000)
          })
-        // db.ref(`cours/`).push(cours).then(res=>{
-        //     notify();
-        // }).catch(err=>{
-        //     notifyFalse()
-        // });
         setCours('');
         setDetail('');
     }
     const notify = () => toast("Cours ajouté!");
-    const notifyFalse = (err) => toast(err);
+    // const notifyFalse = (err) => toast(err);
 
     return (
         <div className=' mainDiv ml-4'>
@@ -44,6 +45,9 @@ const Cours = () => {
           </fieldset>
           <fieldset>
             <input placeholder=" detail" type="text" tabIndex="2" value={detail} required onChange={(e)=>setDetail(e.target.value)}/>
+          </fieldset>
+          <fieldset>
+            <input placeholder=" detail" type="date" tabIndex="2" value={dater} required onChange={(e)=>setDater(e.target.value)}/>
           </fieldset>
           <fieldset>
             {btnAdd}

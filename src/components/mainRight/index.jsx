@@ -37,6 +37,7 @@ const MainRight = () => {
                 tileClassName={tileClassName}
                 defaultActiveStartDate={new Date()}
                 style={{border: 'none'}}
+
             />
             {/* </div> */}
             <div className="card " style={{maxWidth: '470px', maxHeight: '460px'}}>

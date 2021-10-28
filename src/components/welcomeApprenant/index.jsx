@@ -1,14 +1,14 @@
 import React from 'react';
-import Main from '../main';
+import MainApprenant from '../mainApprenant';
 import MainRight from '../mainRight';
 
 
-const Welcome = () => {
+const WelcomeApprenant = () => {
 
 
     return (
         <div className='App'> 
-            <Main />
+            <MainApprenant />
             <div className='container mainRight'>
                 <MainRight />
             </div>
@@ -16,4 +16,4 @@ const Welcome = () => {
     )
 }
 
-export default Welcome
+export default WelcomeApprenant
