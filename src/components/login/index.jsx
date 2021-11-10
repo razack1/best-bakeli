@@ -4,7 +4,7 @@ import { auth, googleAuthProvider,dbFirestore } from "../../firebase";
 import './index.css';
 
 
-const Login = () => {
+const Login = ({roleData}) => {
 
     const [email, setEmail] = useState('apprenant@gmail.com');
     const [password, setPassword] = useState('apprenant');
@@ -13,23 +13,19 @@ const Login = () => {
 
     const handleChange= e=>{
         e.preventDefault();
-        // setUsername(e.target.value)
        const login =auth.signInWithEmailAndPassword(email,password);
 
        return login.then(res=>{
-          dbFirestore.doc(res.user.uid).set({email}).then(resp=>{
-             route.push("/welcome");
-          })
-        //  console.log(logFirestore)
-       })
+    
+            dbFirestore.doc(res.user.uid).get().then(result => {
+                roleData(result.data().role);
+            });
 
-       const { user } = login; 
+            route.push('/welcome');
 
-    //    const logFirestore=  dbFirestore.doc(user.uid).set({email});
-
-    //    console.log(login.then(res=> console.log(res.user.uid)));
-        
+       })  
     }
+
         
 
     return (

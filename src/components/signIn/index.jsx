@@ -19,7 +19,7 @@ const SignIn = () => {
 
 
     useEffect(() => {
-        if (email.length>=12 && nom.length> 5 && prenom.length> 5 && password.length>= 6 ) {
+        if (email.length>=8 && nom.length> 5 && prenom.length> 5 && password.length>= 6 ) {
           setbtn(true);
         }
     }, [email,nom,prenom,password])

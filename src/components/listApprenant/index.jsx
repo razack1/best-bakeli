@@ -79,7 +79,7 @@ const ListApprenant = () => {
                         prof.role ==='apprenant'?(
                             <div  key={index} className="pb-2">
                             <div className="card" style={{maxWidth: '600px'}}>
-                                <div className="row no-gutters">
+                                <div className="row no-gutters" >
                                   <div className="col ">
                                     <img src={img1} className="card-img" alt="..."/>
                                     <div className="card-body">

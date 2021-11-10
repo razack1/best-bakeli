@@ -75,7 +75,7 @@ const ListProf = () => {
                     
                     <div  key={index} className="pb-2">
                       {console.log(prof.id)}
-                      <div className="card" style={{maxWidth: '480px'}}>
+                      <div className="card" style={{maxWidth: '650px'}}>
                           <div className="row no-gutters">
                             <div className="col ">
                               <img src={img1} className="card-img" alt="..."/>
